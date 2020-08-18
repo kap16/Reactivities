@@ -6,9 +6,15 @@ import { act } from 'react-dom/test-utils'
 
 interface IProps {
   activity: IActivity;
+  setEditMode: (editMode: boolean) => void;
+  setSelectedActivity: (activity: IActivity | null) => void;
 }
 
-const ActivitiesDetails: React.FC<IProps> = ({activity}) => {
+const ActivitiesDetails: React.FC<IProps> = ({
+  activity,
+  setEditMode,
+  setSelectedActivity
+}) => {
   return (
     <Card>
       <Image src={`/assets/categoryImages/${activity.category}.jpg`} wrapped ui={false} />
@@ -23,8 +29,16 @@ const ActivitiesDetails: React.FC<IProps> = ({activity}) => {
       </Card.Content>
       <Card.Content extra>
         <Button.Group widths={2}>
-          <Button basic color='blue' content='Edit' />
-          <Button basic color='grey' content='Cancel' />
+          <Button 
+            onClick={() => setEditMode(true)} 
+            basic 
+            color='blue' 
+            content='Edit' />
+          <Button
+            onClick={() => setSelectedActivity(null)}
+            basic 
+            color='grey' 
+            content='Cancel' />
         </Button.Group>
       </Card.Content>
     </Card>
